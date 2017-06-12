@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Organization Details</title>
+</head>
+<body>
+<h2>Organization Details</h2>
+
+<br></br>
+	<form action="#" th:action="@{/organization/edit}" th:object="${organization}" method="post">
+	   
+	   <input type="hidden" id="id" th:field="${organization.id}" /> 
+	   <input type="text" name="name" id="name" th:field="${organization.name}"
+				th:value="${organization.name}"  required="required" /> 
+						
+		<input type="text" name="description" id="email" th:field="${organization.description}"
+				th:value="${organization.description}" required="required" /> 
+		<input type="submit" value="Edit"/>
+	   
+	</form>
+
+
+</body>
+</html>

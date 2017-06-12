@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>Users</title>
+
 </head>
 <body>
-	<table>
-	    <tr>
-	      <td>Name</td>
-	      <td>Email</td>
+	<h2>User List</h2>
+	<br></br>
+	<table class="table table-bordered">
+	    <tr class="table-active ">
+	      <td><h3>User ID</h3></td>
+	      <td><h3>Name</h3></td>
+	      <td><h3>Email</h3></td>
 	    </tr>
 		<tr th:each="user : ${users}">
+			<td th:text="${user.id}"></td>
 			<td th:text="${user.name}"></td>
 			<td th:text="${user.email}"></td>
+			<td><a th:href="@{'/user/' + ${user.id} + '/edit'}"> Edit
+			</a></td>
+			<td><a th:href="@{/delete(id=${user.id})}"> Delete
+			</a></td>
+			
 		</tr>
 	</table>
 </body>

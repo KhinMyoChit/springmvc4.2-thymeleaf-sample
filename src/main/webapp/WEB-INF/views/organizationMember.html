@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add Organization Member List</title>
+</head>
+<body>
+	<h4>
+		<font color="green"> Add New Organization Member </font>
+	</h4>
+	
+	<p th:text="${session.message}" th:unless="${session == null}">[...]</p>
+		
+    <p th:text="${session.existMember}" th:unless="${session == null}">[...]</p>	
+	<form action="#" th:action="@{'/organization/' + ${orgid} + '/members' + '/new'}"
+		th:object="${user}" method="post">
+		
+
+		<table>
+			<tr>
+				<td>Member Name</td>
+				<td><input type="text" th:field="*{name}"
+					placeholder="Enter Member Name" /></td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td><input type="submit" value="Add" /></td>
+			</tr>
+
+		</table>
+
+		<div th:each="orgMember : ${orgMembers}">
+			<div th:text="${orgMember.name}"></div>
+		</div>
+
+	</form>
+</body>
+</html>

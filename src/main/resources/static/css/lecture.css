@@ -1,0 +1,59 @@
+html, body  {
+
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  background-color: #ffffff;
+}
+
+.navbar {
+
+  border: none;
+  border-radius: 0;
+  background-color: #10A189;
+  box-shadow: #0070001361361363px 3px 3px;
+}
+
+.navbar-brand, .createLecture > a, .email, .caret {
+
+  color: white !important;
+}
+
+.nav-pills > li > a:hover {
+
+  background-color: #F6F9FB;
+}
+
+.navbar-toggle.collapsed {
+  
+  background-color: #222;
+  border: 1px solid #222;
+}
+
+.lectureDiv {
+  color: rgb(51, 153, 204);
+  background-color: rgb(233, 230, 232);
+  box-shadow: rgb(136, 136, 136) 3px 3px 3px 3px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  word-break: break-all;
+}
+.lectureNameDiv {
+
+  display: inline-block;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.tools {
+  margin-right: 10px;
+  padding-top: 7px;
+  float: right;
+  cursor: pointer;
+}
+.editNameInput {
+
+  height: inherit;
+}

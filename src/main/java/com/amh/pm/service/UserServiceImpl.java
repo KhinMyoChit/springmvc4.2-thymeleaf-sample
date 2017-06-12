@@ -35,4 +35,33 @@ public class UserServiceImpl implements UserService {
         return userDao.findById(id);
     }
 
+	@Override
+	@Transactional
+	public void edit(User user) {
+		userDao.edit(user);		
+	}
+
+	@Override
+	@Transactional
+	public void delete(int id) {
+		userDao.delete(id);		
+	}
+
+	@Override
+	@Transactional
+	public List<User> userByName(String name, String password) {
+		return userDao.userByName(name, password);
+	}
+
+	
+	public List<User> findUserNameByOrgnId(int orgId) {
+		return userDao.findUserNameByOrgnId(orgId);
+	}
+	
+	public User findUserIdByName(String name) {
+		return userDao.findUserIdByName(name);
+	}
+
+	
+
 }

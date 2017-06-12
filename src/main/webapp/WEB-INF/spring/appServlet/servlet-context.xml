@@ -39,11 +39,18 @@
 	<bean id="userService" class="com.amh.pm.service.UserServiceImpl">
 		<property name="userDao" ref="userDao"></property>
 	</bean>
+	
+	<bean id="organizationDao" class="com.amh.pm.dao.OrganizationDaoImpl">
+	</bean>
+
+	<bean id="organizationService" class="com.amh.pm.service.OrganizationServiceImpl">
+		<property name="organizationDao" ref="organizationDao"></property>
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/pm" />
+		<property name="url" value="jdbc:mysql://localhost:3306/pmdb2" />
 		<property name="username" value="root" />
 		<property name="password" value="root1" />
 	</bean>

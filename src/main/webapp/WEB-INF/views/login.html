@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Login</title>
+</head>
+<body>
+	<h2>User SignIn</h2>
+	<br></br>
+
+	<p th:text="${session.usermessage}" th:unless="${session == null}">[...]</p>
+	
+	<form  name="userForm" id="userForm" action="#" th:action="@{/loginUser}" th:object="${user}" method="post">
+	
+		<input type="text" th:field="*{name}" placeholder="Name" required="required" />
+		<input type="text" th:field="*{password}" placeholder="password" required="required" />
+		<input type="submit" value="login" />
+		
+		<!-- <p th:if="${#fields.hasErrors('name')}"
+									th:errors="*{name}">UserName error! </p> -->
+		
+	</form>
+	
+</body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>Login User</title>
+</head>
+<body>
+
+	<h2>User SignIn</h2>
+	<br></br>
+	<form action="#" th:action="@{/loginUser}" th:object="${user}" method="post">
+	   <input type="text" th:field="*{id}" placeholder="ID"/>
+	   <input type="text" th:field="*{name}" placeholder="Name" />
+	   <input type="submit" value="SignIn"/>
+	  
+	</form>
+	
+	<br></br>
+	<a th:href="@{/signup}"> SignUp</a>
+</body>
+</html> -->
