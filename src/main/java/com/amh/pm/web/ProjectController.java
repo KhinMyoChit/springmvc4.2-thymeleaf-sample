@@ -88,6 +88,10 @@ public class ProjectController {
         if ((session.getAttribute("userId") == null || session.getAttribute("userId").equals(""))) {
             return "redirect:/login";
         }
+        if (result.hasErrors()) {
+            model.addAttribute("organizationId", organizationId);
+            return "addProject";
+        }
 
         Organization organization = organizationService.findById(organizationId);
 

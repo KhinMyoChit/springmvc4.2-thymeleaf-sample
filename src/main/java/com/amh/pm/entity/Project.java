@@ -2,17 +2,17 @@ package com.amh.pm.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table
@@ -22,22 +22,28 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int project_id;
 
+    @NotEmpty
     @Column(name = "name")
     private String name;
 
+    @NotEmpty
     @Column(name = "description")
     private String description;
 
-    @Column(name = "scheduleStartDate")
+    @Column(name = "scheduleStartDate", nullable = true, unique = false)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date scheduleStartDate;
 
-    @Column(name = "scheduleEndDate")
+    @Column(name = "scheduleEndDate", nullable = true, unique = false)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date scheduleEndDate;
 
-    @Column(name = "actualStartDat")
+    @Column(name = "actualStartDate", nullable = true, unique = false)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date actualStartDate;
 
-    @Column(name = "actualEndDate")
+    @Column(name = "actualEndDate", nullable = true, unique = false)
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
     private Date actualEndDate;
 
     @ManyToOne
@@ -46,27 +52,6 @@ public class Project {
 
     public Project() {
         super();
-    }
-
-    public Project(String name, String description) {
-        super();
-        this.name = name;
-        this.description = description;
-    }
-
-    public Project(String name, String description, Organization organization) {
-        super();
-        this.name = name;
-        this.description = description;
-        this.organization = organization;
-    }
-
-    public Project(int project_id, String name, String description, Organization organization) {
-        super();
-        this.project_id = project_id;
-        this.name = name;
-        this.description = description;
-        this.organization = organization;
     }
 
     public Project(int project_id, String name, String description, Date scheduleStartDate, Date scheduleEndDate, Date actualStartDate, Date actualEndDate,
