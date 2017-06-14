@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>New Project</title>
+
+<link rel="stylesheet"
+	href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script th:inline="javascript">
+	/*<![CDATA[*/
+	$(document).ready(function() {
+		$(".datepicker").datepicker();
+	});
+	/*]]>*/
+</script>
+</head>
+<body>
+
+	<h2>ADD New Project</h2>
+	<form action="#"
+		th:action="@{'/organizations/' + ${organizationId} + '/projects' + '/new'}"
+		th:object="${project}" method="post">
+		<p>
+			<input type="text" th:field="*{name}" placeholder="Name"
+				required="required" />
+		</p>
+		<p>
+			<input type="text" th:field="*{description}"
+				placeholder="Description" required="required" />
+		</p>
+		<p>
+			<input type="text" th:field="*{scheduleStartDate}"
+				placeholder="M-dd-yyyy" class="datepicker" />
+		</p>
+		<p>
+			<input type="text" th:field="*{scheduleEndDate}"
+				placeholder="M-dd-yyyy" class="datepicker" />
+		</p>
+		<p>
+			<input type="text" th:field="*{actualStartDate}"
+				placeholder="M-dd-yyyy" class="datepicker" />
+		</p>
+		<p>
+			<input type="text" th:field="*{actualEndDate}"
+				placeholder="M-dd-yyyy" class="datepicker" />
+		</p>
+		<input type="submit" value="ADD" />
+	</form>
+</body>
+</html>

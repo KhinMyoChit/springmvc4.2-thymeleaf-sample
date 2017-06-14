@@ -9,40 +9,35 @@
 <body>
 
 	<a th:href="@{/organizations/new}">ADD</a>
-	<br></br>
-		
-	<h2>Organization List</h2>
-	
+	<br></br>		
+	<h2>Organization List</h2>	
 	<table>
 	    <tr>
 	      <td><h3> ID</h3></td>
 	      <td><h3>Name</h3></td>
-	      <td></td>
-	      
+	      <td></td>	      
 	    </tr>
 		<tr th:each="orgByUser : ${orgListByUser}">
 			<td th:text="${orgByUser.id}"></td>
 			<td th:text="${orgByUser.name}"></td>	
 			<td><a href="#" th:href="@{'/organization/' + ${orgByUser.id} + '/members'}">Member</a></td>
+			<td><a href="#" th:href="@{'/organizations/' + ${orgByUser.id} + '/projects'}">Show Project</a></td>
 			<td></td>				
 		</tr>
 	</table>
-	<br></br>
-	
+	<br></br>	
 	<h2>Organization List By Member</h2>
-	
 	<table>
 	    <tr>
 	      <td><h3> ID</h3></td>
-	      <td><h3>Name</h3></td>
-	      
+	      <td><h3>Name</h3></td>	      
 	    </tr>
 		<tr th:each="orgByMember : ${orgListByMember}">
 			<td th:text="${orgByMember.id}"></td>
 			<td th:text="${orgByMember.name}"></td>		
-			<td><a href="#" th:href="@{'/organization/' + ${orgByMember.id} + '/members'}">Member</a></td>				
+			<td><a href="#" th:href="@{'/organization/' + ${orgByMember.id} + '/members'}">Member</a></td>	
+			<td><a href="#" th:href="@{'/organizations/' + ${orgByMember.id} + '/projects'}">Show Project</a></td>			
 		</tr>
-	</table>
-	
+	</table>	
 </body>
 </html>
