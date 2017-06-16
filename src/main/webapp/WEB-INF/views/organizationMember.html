@@ -2,38 +2,79 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Add Organization Member List</title>
+<title>Add Organization Member</title>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	$(function() {
+		$("#search").autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					url : "members/searchMembers",
+					dataType : 'json',
+					data : request,
+					success : function(data) {
+						if (typeof Array.prototype.forEach != 'function') {
+							Array.prototype.forEach = function(callback) {
+								for (var i = 0; i < this.length; i++) {
+									callback.apply(this, [ this[i], i, this ]);
+								}
+							};
+						}
+
+						var values = data;
+						var newArray = new Array(values.length);
+						var i = 0;
+						values.forEach(function(entry) {
+							var newObject = {
+								label : entry.name
+							};
+							newArray[i] = newObject;
+							i++;
+						});
+
+						response(newArray);
+					}
+				});
+			},
+			minLength : 1
+		});
+	});
+	/*]]>*/
+</script>
 </head>
 <body>
 	<h4>
 		<font color="green"> Add New Organization Member </font>
 	</h4>
-	
-	<p th:text="${session.message}" th:unless="${session == null}">[...]</p>
-		
-    <p th:text="${session.existMember}" th:unless="${session == null}">[...]</p>	
-	<form action="#" th:action="@{'/organization/' + ${orgid} + '/members' + '/new'}"
+	<font color="red">
+		<p th:text="${session.message}" th:unless="${session == null}">[...]</p>
+	</font>
+	<font color="red">
+		<p th:text="${session.existMember}" th:unless="${session == null}">[...]</p>
+	</font>
+	<form action="#"
+		th:action="@{'/organizations/' + ${orgid} + '/members'}"
 		th:object="${user}" method="post">
-		
 
 		<table>
 			<tr>
 				<td>Member Name</td>
 				<td><input type="text" th:field="*{name}"
-					placeholder="Enter Member Name" /></td>
+					placeholder="Enter Member Name" id="search" /></td>
 			</tr>
-
 			<tr>
 				<td></td>
 				<td><input type="submit" value="Add" /></td>
 			</tr>
-
 		</table>
 
 		<div th:each="orgMember : ${orgMembers}">
 			<div th:text="${orgMember.name}"></div>
 		</div>
-
 	</form>
 </body>
 </html>

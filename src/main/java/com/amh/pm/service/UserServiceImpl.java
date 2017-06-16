@@ -1,5 +1,6 @@
 package com.amh.pm.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -35,33 +36,41 @@ public class UserServiceImpl implements UserService {
         return userDao.findById(id);
     }
 
-	@Override
-	@Transactional
-	public void edit(User user) {
-		userDao.edit(user);		
-	}
+    @Override
+    @Transactional
+    public void edit(User user) {
+        userDao.edit(user);
+    }
 
-	@Override
-	@Transactional
-	public void delete(int id) {
-		userDao.delete(id);		
-	}
+    @Override
+    @Transactional
+    public void delete(int id) {
+        userDao.delete(id);
+    }
 
-	@Override
-	@Transactional
-	public List<User> userByName(String name, String password) {
-		return userDao.userByName(name, password);
-	}
+    @Override
+    @Transactional
+    public List<User> userByName(String name, String password) {
+        return userDao.userByName(name, password);
+    }
 
-	
-	public List<User> findUserNameByOrgnId(int orgId) {
-		return userDao.findUserNameByOrgnId(orgId);
-	}
-	
-	public User findUserIdByName(String name) {
-		return userDao.findUserIdByName(name);
-	}
+    public List<User> findUserNameByOrgnId(int orgId) {
+        return userDao.findUserNameByOrgnId(orgId);
+    }
 
-	
+    public User findUserIdByName(String name) {
+        return userDao.findUserIdByName(name);
+    }
+
+    @Override
+    public User checkValidUser(String name, String password) {
+        return userDao.checkValidUser(name, password);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getUsers(String name) {
+        return userDao.getUsers(name);
+    }
 
 }

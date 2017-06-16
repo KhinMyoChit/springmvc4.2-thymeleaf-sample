@@ -7,14 +7,22 @@ import com.amh.pm.entity.User;
 public interface UserDao {
 
     void add(User user);
+
     void edit(User user);
+
     void delete(int id);
 
     List<User> findAll();
 
     User findById(int id);
-    List<User>userByName(String name, String password);
-    
+
+    User checkValidUser(String name, String password);
+
+    List<User> userByName(String name, String password);
+
     User findUserIdByName(String name);
-	List<User> findUserNameByOrgnId(int orgId);
+
+    List<User> findUserNameByOrgnId(int orgId);
+
+    List<User> getUsers(String name);
 }

@@ -1,5 +1,6 @@
 package com.amh.pm.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,54 +34,73 @@ public class UserDaoImpl implements UserDao {
         return entityManager.find(User.class, id);
     }
 
-	@Override
-	public void edit(User user) throws RollbackException {
+    @Override
+    public void edit(User user) throws RollbackException {
 
-		try {
-			entityManager.merge(user);
-		} catch (NoResultException e) {
-			System.out.println(e);
-		}
+        try {
+            entityManager.merge(user);
+        } catch (NoResultException e) {
+            System.out.println(e);
+        }
+    }
 
-	}
+    @Override
+    public void delete(int id) {
+        User user = findById(id);
+        entityManager.remove(user);
+    }
 
-	@Override
-	public void delete(int id) {
-		User user = findById(id);
-		entityManager.remove(user);
-		
-	}
-
-	@Override
-	public List<User> userByName(String name, String password) {
-		Query q = entityManager.createQuery("SELECT u FROM User u WHERE u.name=? AND u.password=?");    
-		q.setParameter(1, name);
-		q.setParameter(2, password);
+    @Override
+    public List<User> userByName(String name, String password) {
+        Query q = entityManager.createQuery("SELECT u FROM User u WHERE u.name=? AND u.password=?");
+        q.setParameter(1, name);
+        q.setParameter(2, password);
         List<User> userNameList = q.getResultList();
-		return userNameList;
-	}
+        return userNameList;
+    }
 
-	@Override
-	public User findUserIdByName(String name) {		
+    @Override
+    public User findUserIdByName(String name) {
 
-		User u = null;
-		try {
-			Query q = entityManager.createQuery("select u from User u WHERE u.name=?");
-			q.setParameter(1, name);
-			u = (User) q.getSingleResult();
-		} catch (NoResultException e) {
-			System.out.println(e);
-		}
-		return u;
-	}
+        User u = null;
+        try {
+            Query q = entityManager.createQuery("select u from User u WHERE u.name=?");
+            q.setParameter(1, name);
+            u = (User) q.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println(e);
+        }
+        return u;
+    }
 
-	@Override
-	public List<User> findUserNameByOrgnId(int orgId) {
-		Query q = entityManager.createQuery("select u from User u JOIN u.orgList orgmlist WHERE orgmlist.id=?");
+    @Override
+    public List<User> findUserNameByOrgnId(int orgId) {
+        Query q = entityManager.createQuery("select u from User u JOIN u.organizations orgmlist WHERE orgmlist.id=?");
 
-		q.setParameter(1, orgId);
-		List<User> userNameList = q.getResultList();
-		return userNameList;
-	}
+        q.setParameter(1, orgId);
+        List<User> userNameList = q.getResultList();
+        return userNameList;
+    }
 
+    @Override
+    public User checkValidUser(String name, String password) {
+
+        try {
+            User user = (User) entityManager.createQuery("SELECT u from User u where u.name = :name and u.password = :password").setParameter("name", name)
+                    .setParameter("password", password).getSingleResult();
+            return user;
+
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<User> getUsers(String name) {
+
+        Query q = entityManager.createQuery("SELECT u FROM User u WHERE u.name LIKE :name");
+        q.setParameter("name", '%' + name + '%');
+        List<User> users = q.getResultList();
+        return users;
+    }
 }
